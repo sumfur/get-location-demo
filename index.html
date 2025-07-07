@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lấy vị trí của bạn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-blue-300 h-screen flex items-center justify-center">
+  <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center space-y-4">
+    <h1 class="text-2xl font-bold text-gray-800">📍 Lấy vị trí của bạn</h1>
+    <p class="text-gray-600">Nhấn vào nút bên dưới để xem vị trí hiện tại của bạn.</p>
+    <button onclick="getLocation()" class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-blue-600 transition">Lấy vị trí</button>
+    <p id="location" class="mt-4 text-sm text-gray-700"></p>
+  </div>
+
+  <script>
+    function getLocation() {
+      const output = document.getElementById("location");
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            output.innerHTML = `Vị trí của bạn: <br><strong>${lat}, ${lon}</strong>`;
+          },
+          (error) => {
+            output.innerText = "Không thể lấy vị trí: " + error.message;
+          }
+        );
+      } else {
+        output.innerText = "Trình duyệt không hỗ trợ định vị.";
+      }
+    }
+  </script>
+</body>
+</html>
